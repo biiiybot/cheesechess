@@ -91,12 +91,16 @@ io.on("connection", (socket) => {
   let acolor;
   let username = socket.handshake.auth.username;
 
-  if (Object.values(game.usernames).includes(username)) {
-    const existingName = Object.keys(game.usernames).find(k => game.usernames[k] === username);
-    if (!game.usersInGame[existingName]) {
-      game.usersInGame[existingName] = socket.id;
-    }
+   const color = Object.keys(game.usernames).find(
+    c => game.usernames[c] === username
+  );
+
+  if (!color) {
+    console.log("username not found:", username);
+    return;
   }
+
+  game.usersInGame[color] = socket.id;
 
   console.log("A player connected:", socket.id);
   for (let i = 0; i < 4; i++) {
