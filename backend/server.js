@@ -89,30 +89,29 @@ newGame();
 
 io.on("connection", (socket) => {
   let acolor;
-  let username = socket.handshake.auth.username;
-
-   const color = Object.keys(game.usernames).find(
+    const username = socket.handshake.auth.username;
+  let color = Object.keys(game.usernames).find(
     c => game.usernames[c] === username
   );
 
-  if (!color) {
-    console.log("username not found:", username);
-    return;
-  }
-
-  game.usersInGame[color] = socket.id;
-
-  console.log("A player connected:", socket.id);
-  for (let i = 0; i < 4; i++) {
-    if (game.usersInGame[allColors[i]] === null) {
-      acolor = allColors[i];
-      game.usersInGame[acolor] = socket.id;
-
-      game.usernames[acolor] = username;
-
-      break;
+  // 1. existing user reconnecting
+  if (color) {
+    if (!game.usersInGame[color]) {
+      game.usersInGame[color] = socket.id;
     }
+  } 
+  // 2. new user
+  else {
+    color = allColors.find(c => game.usersInGame[c] === null);
+
+    if (!color) return; // no slots
+
+    game.usersInGame[color] = socket.id;
+    game.usernames[color] = username;
   }
+
+  console.log(username, "joined as", color);
+  
   if (acolor && disconnectClock[acolor]) {
     clearTimeout(disconnectClock[acolor]);
     disconnectClock[acolor] = null;
