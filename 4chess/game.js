@@ -1,4 +1,4 @@
-socket = io("http://localhost:3000");
+const socket = io("https://cheesechess-production.up.railway.app");
 
 function resignButton() {
   if (game.colorToMove === myColor) {
