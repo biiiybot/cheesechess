@@ -89,13 +89,23 @@ newGame();
 
 io.on("connection", (socket) => {
   let acolor;
+  let username = socket.handshake.auth.username;
+
+  if (Object.values(game.usernames).includes(username)) {
+    const existingName = Object.keys(game.usernames).find(k => game.usernames[k] === username);
+    if (!game.usersInGame[existingName]) {
+      game.usersInGame[existingName] = socket.id;
+    }
+  }
 
   console.log("A player connected:", socket.id);
   for (let i = 0; i < 4; i++) {
     if (game.usersInGame[allColors[i]] === null) {
       acolor = allColors[i];
-      game.usersInGame[allColors[i]] = socket.id;
-      game.usernames[acolor] = socket.handshake.auth.username;
+      game.usersInGame[acolor] = socket.id;
+
+      game.usernames[acolor] = username;
+
       break;
     }
   }
@@ -387,7 +397,7 @@ function tryMove(fy, fx, ty, tx, test, pcolor, special) {
                 game.playerPts[game.colorToMove] += pieceVal[pieceType];
                 if (pieceType === "K") {
                   game.playerColors.splice(game.playerColors.indexOf(moveSquare[0]), 1);
-                  if (moveSquare[0] === "d"){
+                  if (moveSquare[0] === "d") {
                     game.deadKings--;
                   }
                 }
