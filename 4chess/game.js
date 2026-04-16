@@ -1,4 +1,9 @@
-const socket = io("https://cheesechess-production.up.railway.app");
+let playerUserName = prompt("enter a username") || "nein";
+const socket = io("https://cheesechess-production.up.railway.app", {
+  auth: {
+    username: playerUserName,
+  }
+});
 
 function resignButton() {
   if (game.colorToMove === myColor) {

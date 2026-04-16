@@ -44,6 +44,7 @@ const startingPos = {
   gameMode: 1,
   state: null,
   usersInGame: { r: null, b: null, y: null, g: null },
+  usernames: { r: null, b: null, y: null, g: null },
   teamWin: null,
   log: "",
 }
@@ -94,6 +95,7 @@ io.on("connection", (socket) => {
     if (game.usersInGame[allColors[i]] === null) {
       acolor = allColors[i];
       game.usersInGame[allColors[i]] = socket.id;
+      game.usernames[acolor] = socket.handshake.auth.username;
       break;
     }
   }

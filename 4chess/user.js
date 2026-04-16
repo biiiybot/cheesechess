@@ -1,4 +1,3 @@
-let playerUserName = /*prompt("enter a username") || */"nein";
 const chatForm = document.getElementById("chatTextBox");
 const messageInput = document.getElementById("message"); // Get the element once
 
