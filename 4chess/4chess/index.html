@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>4Chess</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <h1 class="txt">4 Chess</h1>
+  <p class="txt">chezz but with 4</p>
+  <div id="stuff">
+    <img src="">
+    <div id="gameArea">
+      <div id="board"></div>
+      <div class="pts txt" id="yPts"></div>
+      <div class="pts txt" id="rPts"></div>
+      <div class="pts txt" id="bPts"></div>
+      <div class="pts txt" id="gPts"></div>
+    </div>
+    <div id="endGame" class="modal hidden">
+      <div class="modal-content">
+        <h2>Game Over</h2>
+        <p id="results"></p>
+        <button onclick="document.getElementById('endGame').classList.add('hidden');">Close</button>
+      </div>
+    </div>
+    <div id="sidebar">
+      <h3 class="txt">Chat</h3>
+      <div id="sidebarLog" class="txt"></div>
+      <div id="bottomSideBar">
+        <form id="chatTextBox">
+          <input type="text" id="message" placeholder="type words here">
+        </form>
+        <p class="txt" id="chatName">btw</p>
+        <button type="button" onclick="rotBoard()" class="normalButton">Rotate board</button>
+        <button type="button" id="resign" onclick="resign()" class="normalButton">Resign</button>
+      </div>
+    </div>
+    <img src="">
+  </div>
+  <br>
+  <button type="button" id="newgame" onclick="newGame();socket.emit('newGame');" hidden>new game</button>
+  <button type="button" id="undo" onclick="undoRedoMove()" hidden>undo move</button>
+  <button type="button" id="undo" onclick="undoRedoMove('redo')" hidden>redo move</button>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="game.js"></script>
+  <script src="user.js"></script>
+</body>
+
+</html>
