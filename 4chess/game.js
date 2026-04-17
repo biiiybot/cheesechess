@@ -1,4 +1,5 @@
 let playerUserName = prompt("enter a username") || "nein";
+let canMove = false;
 const socket = io("https://cheesechess-production.up.railway.app", {
   auth: {
     username: playerUserName,
@@ -237,7 +238,7 @@ function canMove() {
 
 function whenClick(event) {
   if (game.usersInGame[game.colorToMove] === socket.id) {
-    if (canMove()) {
+    if (canMove) {
       const square = event.target;
       const x = Number(square.dataset.x);
       const y = Number(square.dataset.y);
@@ -505,7 +506,7 @@ function sendInChat(message) {
 }
 
 function resign() {
-  if (canMove()) {
+  if (canMove) {
     sendInChat(`\n${allColorNames[allColors.indexOf(game.colorToMove)]} resigned`);
     playerToResign = game.colorToMove;
     sendMove("res");
