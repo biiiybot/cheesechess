@@ -125,7 +125,7 @@ io.on("connection", (socket) => {
     pos: game,
     canMove: gamestart,
   });
-  sendInChat(`red: ${game.usernames.r}\nblue: ${game.usernames.b}\nyellow: ${game.usernames.y}\nglue: ${game.usernames.g}`)
+  if(gamestart){ sendInChat(`red: ${game.usernames.r}\nblue: ${game.usernames.b}\nyellow: ${game.usernames.y}\nglue: ${game.usernames.g}`) }
 
   socket.on("move", (move) => {
     const { fy, fx, ty, tx, special } = move;
