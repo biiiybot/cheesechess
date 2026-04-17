@@ -117,11 +117,15 @@ io.on("connection", (socket) => {
     disconnectClock[acolor] = null;
   }
 
+  const gamestart = Object.values(game.usersInGame).every(d => d !== null);
+
   io.emit("updateUsers", {
     users: game.usersInGame,
     id: socket.id,
-    pos: game
+    pos: game,
+    canMove: gamestart,
   });
+  sendInChat(`red: ${game.usernames.r}\nblue: ${game.usernames.b}\nyellow: ${game.usernames.y}\nglue: ${game.usernames.g}`)
 
   socket.on("move", (move) => {
     const { fy, fx, ty, tx, special } = move;
