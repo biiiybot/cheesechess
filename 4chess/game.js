@@ -232,7 +232,7 @@ function checkPromoting(y, x) {
   }
 }
 
-function canMove() {
+function canMoveUNUSED() {
   return game.gameState !== "finished" && game.moves.length === moveViewing && Object.values(game.usersInGame).every(d => d !== null);
 }
 
