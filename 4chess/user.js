@@ -18,6 +18,9 @@ socket.on("chatMessage", (data) => {
 });
 
 socket.on("updateUsers", (data) => {
+    if(canMove){
+        canMove = true;
+    }
     updateClients(data.pos);
     game.usersInGame = data.users;
     if (data.id === socket.id) {
