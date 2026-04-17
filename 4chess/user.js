@@ -28,8 +28,8 @@ socket.on("updateUsers", (data) => {
             myColor = Object.keys(game.usersInGame).find(k => game.usersInGame[k] === socket.id);
             rotBoard(myColor);
             resignButton();
-            drawPieces();
             document.getElementById("chatName").textContent = playerUserName;
         }
     }
+    drawPieces();
 });
