@@ -18,7 +18,7 @@ socket.on("chatMessage", (data) => {
 });
 
 socket.on("updateUsers", (data) => {
-    if(canMove){
+    if(data.canMove){
         canMove = true;
     }
     updateClients(data.pos);
