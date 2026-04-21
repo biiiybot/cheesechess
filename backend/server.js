@@ -41,7 +41,7 @@ const startingPos = {
   doublePawnMoves: {},
   deadKings: 0,
   fiftyRule: 0,
-  gameMode: 1,
+  gameMode: 2,
   state: null,
   usersInGame: { r: null, b: null, y: null, g: null },
   usernames: { r: null, b: null, y: null, g: null },
